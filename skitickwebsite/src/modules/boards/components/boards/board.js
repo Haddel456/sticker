@@ -8,9 +8,9 @@ export function Board({ id, album, numOfQuestions, questions, level, type, MinSc
     const navigate = useNavigate();
 
     const goToEditPage = () => {
-          navigate('/editBoard');
+          navigate(`/editBoard/${id}`);
         };
-
+        
     return (
         <>
          <div className="grid-item" style={{ backgroundImage: `url(${backgroundImage})` }}>

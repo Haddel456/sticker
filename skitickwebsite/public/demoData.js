@@ -150,9 +150,6 @@ const album = [
     "status": "active"
   }
 ]
-<<<<<<< HEAD
-export {demoCardList, questions, album};
-=======
 const demoBoardList = [
   {
     "id": "board001",
@@ -222,4 +219,3 @@ const demoBoardList = [
 
 export { demoBoardList, questions, album };
 
->>>>>>> c78db4f (add board form and dashboard page)

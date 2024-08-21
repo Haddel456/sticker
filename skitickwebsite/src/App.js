@@ -1,19 +1,21 @@
-import { Dashboard } from "./modules/dashboardPage/dashboard.js";
+import { Dashboard } from "./modules/pages/dashboardPage/dashboard.js";
 import "./App.css";
-import Login from "./modules/loginPage/Login";
+import Login from "./modules/pages/loginPage/Login.js";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
 } from "react-router-dom";
-import { EditBoardPage } from './modules/editBoardPage/editBoardPage.js';
+import { EditBoardPage } from './modules/pages/editBoardPage/editBoardPage.js';
+
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/editBoard" element={<EditBoardPage />} />
+        <Route path="/editBoard/:id" element={<EditBoardPage />} />
       </Routes>
     </Router>
   );

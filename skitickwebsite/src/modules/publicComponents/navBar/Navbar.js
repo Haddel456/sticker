@@ -5,7 +5,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-wrapper">
         <a href="/dashboard" className="navbar-brand">
-          <img src="./Group45253.png" />
+          <img alt="logo" src="../../.././Group45253.png"  />
         </a>
 
         <div className="navbar-links">
