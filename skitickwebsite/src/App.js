@@ -5,26 +5,15 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
-import Navbar from "./modules/component/Navbar.js";
+import { EditBoardPage } from './modules/editBoardPage/editBoardPage.js';
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-
-        <Route
-          path="/dashboard"
-          element={
-            <>
-              <Navbar />
-              <Dashboard />
-            </>
-          }
-        />
-
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/editBoard" element={<EditBoardPage />} />
       </Routes>
     </Router>
   );

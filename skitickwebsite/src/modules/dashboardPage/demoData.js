@@ -1,69 +1,4 @@
-const demoCardList2 = [
-    {
-      "id": "board001",
-      "album": "album001",
-      "numOfQuestions": 10,
-      "questions": ["question001", "question002"],
-      "level": 1,
-      "type": "quiz",
-      "MinScore": 50,
-      "numOfTries": 3,
-      "status": "active",
-      "backgroundImage": "math_background.jpg",
-      "title": "Math Quiz",
-      "description": "A basic math quiz covering addition and subtraction.",
-      "index": 1,
-      "numberOfStickers": 5
-    },
-    {
-      "id": "board002",
-      "album": "album002",
-      "numOfQuestions": 15,
-      "questions": ["question003", "question004"],
-      "level": 2,
-      "type": "quiz",
-      "MinScore": 70,
-      "numOfTries": 2,
-      "status": "inactive",
-      "backgroundImage": "history_background.jpg",
-      "title": "History Quiz",
-      "description": "A quiz on ancient civilizations and historical events.",
-      "index": 2,
-      "numberOfStickers": 10
-    },
-    {
-      "id": "board003",
-      "album": "album003",
-      "numOfQuestions": 20,
-      "questions": ["question005", "question006", "question007"],
-      "level": 3,
-      "type": "challenge",
-      "MinScore": 80,
-      "numOfTries": 1,
-      "status": "active",
-      "backgroundImage": "science_background.jpg",
-      "title": "Science Challenge",
-      "description": "Advanced science questions focusing on physics and chemistry.",
-      "index": 3,
-      "numberOfStickers": 15
-    },
-    {
-      "id": "board004",
-      "album": "album004",
-      "numOfQuestions": 5,
-      "questions": ["question008", "question009"],
-      "level": 1,
-      "type": "quiz",
-      "MinScore": 60,
-      "numOfTries": 3,
-      "status": "active",
-      "backgroundImage": "geography_background.jpg",
-      "title": "Geography Quiz",
-      "description": "Test your knowledge of world geography.",
-      "index": 4,
-      "numberOfStickers": 7
-    }
-  ]
+
 
 const questions = [
   {
@@ -150,9 +85,6 @@ const album = [
     "status": "active"
   }
 ]
-<<<<<<< HEAD
-export {demoCardList, questions, album};
-=======
 const demoBoardList = [
   {
     "id": "board001",
@@ -222,4 +154,3 @@ const demoBoardList = [
 
 export { demoBoardList, questions, album };
 
->>>>>>> c78db4f (add board form and dashboard page)
