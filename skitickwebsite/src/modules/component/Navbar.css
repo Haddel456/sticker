@@ -1,0 +1,65 @@
+/* styles.css */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .navbar-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .navbar-brand {
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+    
+  }
+  
+  .brand-highlight {
+    color: #38a169; /* Equivalent to Tailwind's text-green-600 */
+  }
+  
+  .navbar-links {
+    display: flex;
+    
+    align-items: center;
+  }
+  
+  .navbar-button {
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .navbar-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .create-case {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .navbar-divider {
+    height: 32px;
+    width: 1px;
+    background-color: #ccc;
+    margin: 0 16px;
+  }
+  

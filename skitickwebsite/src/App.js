@@ -1,4 +1,4 @@
-import {Dashboard} from './modules/dashboardPage/dashboard.js';
+import { Dashboard } from "./modules/dashboardPage/dashboard.js";
 import "./App.css";
 import Login from "./modules/loginPage/Login";
 import {
@@ -7,12 +7,23 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import Navbar from "./modules/component/Navbar.js";
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <Navbar />
+              <Dashboard />
+            </>
+          }
+        />
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

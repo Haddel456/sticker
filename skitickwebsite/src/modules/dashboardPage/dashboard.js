@@ -1,12 +1,11 @@
+import React from "react";
+import { CardsList } from "../boards/components/boards/boardsList";
 
-import React from 'react'
-import { CardsList } from '../boards/components/boards/boardsList'
 export function Dashboard(props) {
+  return (
+    <>
     
-
-    return (
-        <>
-           <CardsList/>
-        </>
-    )
+      <CardsList />
+    </>
+  );
 }

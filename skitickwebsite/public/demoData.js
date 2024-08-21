@@ -150,5 +150,4 @@ const album = [
     "status": "active"
   }
 ]
-
 export {demoCardList, questions, album};
