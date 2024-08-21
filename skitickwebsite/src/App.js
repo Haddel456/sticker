@@ -1,7 +1,6 @@
 import {Dashboard} from './modules/dashboardPage/dashboard.js';
 import "./App.css";
-import Dashboard from "./component/Dashboard";
-import Login from "./component/Login";
+import Login from "./modules/loginPage/Login";
 import {
   BrowserRouter as Router,
   Route,
