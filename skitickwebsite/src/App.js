@@ -7,7 +7,7 @@ import {
   Routes,
 } from "react-router-dom";
 import { EditBoardPage } from './modules/pages/editBoardPage/editBoardPage.js';
-
+import { CreateBoard } from "./modules/pages/dashboardPage/createboard.js";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/editBoard/:id" element={<EditBoardPage />} />
+        <Route path="/createboard" element={<CreateBoard />} />
       </Routes>
     </Router>
   );

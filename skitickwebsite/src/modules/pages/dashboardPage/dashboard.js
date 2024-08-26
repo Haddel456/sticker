@@ -3,6 +3,7 @@ import { BoardsList } from '../../boards/components/boards/boardsList'
 import { demoBoardList } from './demoData'
 import Navbar from '../../publicComponents/navBar/Navbar'
 import './dashboard.css'
+import { AddButton } from './addbutton'
 export function Dashboard(props) {
 
 
@@ -11,6 +12,7 @@ export function Dashboard(props) {
          <Navbar/>
         <div className='dashboardContainer'>
           <BoardsList boardsList={demoBoardList}/> 
+          <AddButton/>
         </div>
         </>
     )
