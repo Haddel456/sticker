@@ -1,22 +1,21 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { getBaseQuery } from "../../rdx/rdxUtilites";
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
-export const boardsApi = createApi({
-  reducerPath: "boardsApi",
-  baseQuery: getBaseQuery(),
-  endpoints: (builder) => ({
+export const boardsApi = createApi({ reducerPath: "boardsApi",baseQuery: getBaseQuery(),endpoints: (builder) => ({
+  
 
-    getBoards: builder.query({
+    getBoard: builder.query({
       query: (id) => ({
-        url: `boards/${id}`,
+        url: `${baseUrl}/api/boards/get-by-id/${id}`,
         method: "GET",
       }),
     }),
 
-    getBoard: builder.query({
+    getBoards: builder.query({
       query: () => ({
-        url: `boards/`,
+        url: `${baseUrl}/api/boards/getAll/`,
         method: "GET",
       }),
     }),
@@ -25,16 +24,16 @@ export const boardsApi = createApi({
     addBoard: builder.mutation({
       query: (boardData) => {
         return {
-          url: `boards/`,
+          url: `${baseUrl}/api/boards/insert/`,
           method: "POST",
-          body: boardData,
+          body: JSON.stringify(boardData),
         };
       },
     }),
 
     deleteBoard: builder.mutation({
       query: ({ id }) => ({
-        url: `boards/${id}`,
+        url: `${baseUrl}/api/boards/delete-by-id/${id}`,
         method: "DELETE",
       }),
     }),
@@ -42,9 +41,9 @@ export const boardsApi = createApi({
     updateBoard: builder.mutation({
       query: ({ formData, id }) => {
         return {
-          url: `boards/${id}`,
+          url: `${baseUrl}/api/boards/set-active/${id}`,
           method: "PUT",
-          body: formData,
+          body: JSON.stringify(formData),
         };
       },
     }),

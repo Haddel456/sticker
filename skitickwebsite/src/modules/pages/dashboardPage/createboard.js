@@ -7,7 +7,6 @@ export function CreateBoard(){
         <>
         <div >
             <Navbar/>
-
             <BoardForm  />
         </div>
         </>

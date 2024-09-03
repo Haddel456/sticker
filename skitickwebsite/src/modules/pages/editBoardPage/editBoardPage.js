@@ -11,13 +11,15 @@ export function EditBoardPage(props) {
 
     const { id } = useParams();
     const [board, setBoard] = useState();
-
+    const { getBoard,addBoard, updateBoard, pendinGetBoards } = useBoardsHelpers();
     const handleFormSubmit = (formData) => {
         console.log('Form data submitted:', formData);
-        // You can perform further actions like sending data to an API here
-    };
-
-    const { getBoard, pendingGetBoards } = useBoardsHelpers();
+        if (id) {
+            updateBoard(formData);
+        }else{
+            addBoard(formData);
+        }
+    }; 
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -36,14 +38,15 @@ export function EditBoardPage(props) {
 
             }
             }
-        })();
+        }
+    )();
         }, [id, getBoard, dispatch]);
+        // console.log(boardData)
 
     return (
         <>
         <div >
             <Navbar/>
-
             <BoardForm onSubmit={handleFormSubmit} />
         </div>
         </>

@@ -1,0 +1,13 @@
+/* stikers list css */
+
+.stikerslistContainer {
+    padding: 10px;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.stikerImg {
+    width: 100px;
+    height: 100px;
+}

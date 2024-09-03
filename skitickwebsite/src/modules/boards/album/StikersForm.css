@@ -1,0 +1,25 @@
+form {
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.textBton {
+    display: flex;
+    align-items: center;
+}
+
+.textBton input {
+    width: 80%;
+    height: 50%;
+}
+
+.textBton .uploadImg {
+    margin: 5px;
+    width: 35%;
+    font-size: medium;
+}
