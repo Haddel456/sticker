@@ -1,42 +1,80 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { getBaseQuery } from "../../rdx/rdxUtilites";
-
-/// need to fix 
-export const StikersListApi = createApi({
-  reducerPath: "StikersListApi",
-  baseQuery: getBaseQuery(),
-  endpoints: (builder) => ({
-
-    getStikers: builder.query({
-      query: (id) => ({
-        url: `/${id}`,     // TO FILL
-        method: "GET",
-      }),
-    }),
-
-    
-    addStikersList: builder.mutation({
-      query: (stickerData) => {
-        return {
-          url: `/`,     // TO FILL
-          method: "POST",
-          body: stickerData,
-        };
-      },
-    }),
-
-    deleteStikersList: builder.mutation({
-      query: ({ id }) => ({
-        url: `/${id}`,   // TO FILL
-        method: "DELETE",
-      }),
-    }),
 
 
-  }),
-});
+// src/api/stickersApi.js
 
-export const {
-    
-  
-} = StikersListApi;
+const BASE_URL = 'https://skitick-app-935033534367.me-west1.run.app/api/stickers';
+
+// Fetch all stickers
+export const getStickers = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/stickers`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch stickers');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching stickers:', error);
+        throw error;
+    }
+};
+
+// Add a new sticker
+export const addSticker = async (data) => {
+    try {
+        const response = await fetch(`${BASE_URL}/insert`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to save image');
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error saving sticker:', error);
+        throw error;
+    }
+};
+
+// Update an existing sticker
+export const updateSticker = async (stickerId, data) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${stickerId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update sticker');
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error updating sticker:', error);
+        throw error;
+    }
+};
+
+
+export const DeleteSticker = async (stickerId, data) => {
+  try {
+      const response = await fetch(`${BASE_URL}/${stickerId}`, {
+          method: 'Delete',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+          throw new Error('Failed to Delete sticker');
+      }
+      return response.json();
+  } catch (error) {
+      console.error('Error Deleting  sticker:', error);
+      throw error;
+  }
+};

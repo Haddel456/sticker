@@ -1,21 +1,25 @@
 /* GridView.css */
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-  }
-  
-  .grid-item {
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 5px;
-    padding: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.grid-item {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 4px;
+  height: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
