@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import "./StikersList.css"
 import GridView from '../../publicComponents/gridview/GridView'
-import { DeleteSticker } from './api/StikersApi';
+import { DeleteSticker } from './api/StikersApi'
+import Message from '../Message'
 
 
  export function StikersList({stickers ,  onEdit}) {
@@ -22,8 +23,10 @@ import { DeleteSticker } from './api/StikersApi';
         // );
 
         setStatus('Sticker deleted successfully');
+        <Message message="Sticker deleted successfully " type="error" />
     } catch (error) {
         setStatus('An error occurred while deleting the sticker');
+        <Message message="Oops something happened " type="error" />
     }
             setCurrentSticker((currentSticker) => 
             currentSticker.filter(sticker => sticker._id !== deletedSticker._id)

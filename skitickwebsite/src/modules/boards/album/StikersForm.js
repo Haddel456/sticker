@@ -4,7 +4,8 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { storage } from "../../../firestore/firestore"
 import { StikersList } from './StikersList'
 import Navbar from '../../publicComponents/navBar/Navbar'
-import { getStickers, addSticker, updateSticker } from './api/StikersApi';
+import { getStickers, addSticker, updateSticker } from './api/StikersApi'
+import Message from '../Message'
 
 const StikersForm = () => {
 
@@ -34,12 +35,15 @@ const StikersForm = () => {
         try {
           if (editedSticker) {
               await updateSticker(editedSticker._id, data);
+              <Message message="Sticker Edited successfully" type="success" />
           } else {
               await addSticker(data);
               setStatus('Image saved successfully');
+              <Message message="Sticker Added successfully" type="success" />
           }
       } catch (error) {
           setStatus('An error occurred while saving the image');
+          <Message message="Oops something happened " type="error" />
       }
   };
     
@@ -95,6 +99,7 @@ const StikersForm = () => {
         }, 
         (error) => {
           console.error('Error uploading file:', error);
+          <Message message="Oops something happened " type="error" />
           setIsLoading(false); // Stop loading on error
         }, 
         async () => {
@@ -113,6 +118,7 @@ const StikersForm = () => {
           setStickers(data);
       } catch (error) {
           console.error('Failed to fetch stickers:', error);
+          <Message message="Oops something happened " type="error" />
       }
   };
   useEffect(() => {
