@@ -1,5 +1,3 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-
 
 // src/api/stickersApi.js
 
@@ -22,7 +20,7 @@ export const getStickers = async () => {
 // Add a new sticker
 export const addSticker = async (data) => {
     try {
-        const response = await fetch(`${BASE_URL}/insert`, {
+        const response = await fetch(`https://skitick-app-935033534367.me-west1.run.app/api/stickers/insert`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,15 +32,15 @@ export const addSticker = async (data) => {
         }
         return response.json();
     } catch (error) {
-        console.error('Error saving sticker:', error);
-        throw error;
+            throw error;
+        
     }
 };
 
 // Update an existing sticker
 export const updateSticker = async (stickerId, data) => {
     try {
-        const response = await fetch(`${BASE_URL}/${stickerId}`, {
+        const response = await fetch(`${BASE_URL}/update/${stickerId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,14 +58,13 @@ export const updateSticker = async (stickerId, data) => {
 };
 
 
-export const DeleteSticker = async (stickerId, data) => {
+export const DeleteSticker = async (stickerId) => {
   try {
-      const response = await fetch(`${BASE_URL}/${stickerId}`, {
+      const response = await fetch(`${BASE_URL}/delete-by-id/${stickerId}`, {
           method: 'Delete',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
       });
       if (!response.ok) {
           throw new Error('Failed to Delete sticker');

@@ -8,41 +8,38 @@ import Message from '../Message'
  export function StikersList({stickers ,  onEdit}) {
 
   const [currentSticker, setCurrentSticker] = useState(stickers);
-  const [state , setStatus]= useState('');
+  const [status , setStatus]= useState(null);
+
+ 
 
   const handleDelete = async (deletedSticker) => {
-    const updatedSticker = { ...deletedSticker, status: '5' };  // Update status to 5
+    // const updatedSticker = { ...deletedSticker, status: '5' };  // Update status to 5
 
     try {
         // Update the sticker's status to '5' on the server
-        await DeleteSticker(deletedSticker._id, updatedSticker);
-
-        // Update current stickers in state: Filter out the sticker with status '5'
-        // setCurrentSticker((currentSticker) => 
-        //     currentSticker.filter(sticker => sticker._id !== deletedSticker._id)
-        // );
-
-        setStatus('Sticker deleted successfully');
-        <Message message="Sticker deleted successfully " type="error" />
-    } catch (error) {
-        setStatus('An error occurred while deleting the sticker');
-        <Message message="Oops something happened " type="error" />
-    }
-            setCurrentSticker((currentSticker) => 
-            currentSticker.filter(sticker => sticker._id !== deletedSticker._id)
+        await DeleteSticker(deletedSticker._id);
+         setCurrentSticker(currentSticker => 
+          currentSticker.filter(sticker => sticker._id !== deletedSticker._id)
         );
+        setStatus({ message: 'Sticker edited successfully', type: 'success' });
+        
+    } catch (error) {
+      setStatus({ message: 'An error occurred while editing the sticker', type: 'error' });
+    }
 };
   
-  console.log(state);
-  console.log(currentSticker);
+
   const handleEdit = (editSticker) => {
     onEdit(editSticker);
   };
 
     return (
         <>
+        {status && <Message message={status.message} type={status.type} />}
         <GridView>
-        {currentSticker && currentSticker.map(sticker => (
+        {currentSticker && currentSticker
+        .filter(sticker => sticker.status !== '5')
+        .map(sticker => (
         <div className='stickerListContainer' key={sticker._id}>
           <img className='stickerImg' src={sticker.imagePath} alt={`Sticker ${sticker._id}`}  />
           <div className='imgButton'>

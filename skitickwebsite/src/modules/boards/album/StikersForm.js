@@ -24,30 +24,26 @@ const StikersForm = () => {
 
         const data = {
           imagePath: imageUrl,
-          name: imageName,
-          status: '1',
-        };
+          name:imageName
+        }
 
-        if(!imageUrl || !imageName){
-          console.log('No URL entered');
+        
+        console.log(data);
+
+         if(!imageUrl || !imageName){
+           console.log('Enter URL and image name' );
           return;
         }
+
         try {
-          if (editedSticker) {
-              await updateSticker(editedSticker._id, data);
-              <Message message="Sticker Edited successfully" type="success" />
-          } else {
               await addSticker(data);
-              setStatus('Image saved successfully');
-              <Message message="Sticker Added successfully" type="success" />
-          }
+              setStatus({ message: 'Sticker edited successfully', type: 'success' });
+              console.log(status);
       } catch (error) {
-          setStatus('An error occurred while saving the image');
-          <Message message="Oops something happened " type="error" />
+        setStatus({ message: 'Error saveing image', type: 'error' });
       }
   };
     
-
     const handleCancel = () => {
         setImageUrl('');  // Clear the image URL
         setIsUploaded(false);  // Allow the user to upload another file
@@ -74,11 +70,15 @@ const StikersForm = () => {
       setImageName(sticker.name); 
       setImageUrl(sticker.imagePath); 
       setEditedSticker(sticker);
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'  // Smooth scrolling
+      });
     };
 
-      const handleFileChange = async (e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files[0];
-        console.log('')
         if (!file) {
           console.log('No file selected');
           return;
@@ -94,31 +94,31 @@ const StikersForm = () => {
       uploadTask.on('state_changed', 
         (snapshot) => {
           // Get upload progress as a percentage
-          const progressValue = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const progressValue =  Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
           setProgress(progressValue); 
         }, 
         (error) => {
-          console.error('Error uploading file:', error);
-          <Message message="Oops something happened " type="error" />
+          setStatus({ message: 'Error uploading file', type: 'error' });
           setIsLoading(false); // Stop loading on error
         }, 
         async () => {
           // File successfully uploaded
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           setImageUrl(downloadURL);
+          setStatus({ message: 'File uploaded successfully', type: 'success' });
           setIsUploaded(true);
           setIsLoading(false); 
         }
       );
     };
 
+
     const fetchStickers = async () => {
       try {
           const data = await getStickers();
           setStickers(data);
       } catch (error) {
-          console.error('Failed to fetch stickers:', error);
-          <Message message="Oops something happened " type="error" />
+          setStatus({ message: 'Failed to upload stickers', type: 'error' });   
       }
   };
   useEffect(() => {
@@ -126,16 +126,38 @@ const StikersForm = () => {
   }, []);
 
 
+
+  const handleSaveEdite = async ()=> {
+    const updatedSticker = {
+      ...editedSticker,
+      imagePath:imageUrl,
+      imageName:imageName
+    }
+
+    if(!imageUrl || !imageName){
+      console.log('No URL entered');
+      return;
+    }
+    try {
+          await updateSticker(editedSticker._id, updatedSticker);
+          setStatus({ message: 'Image Edit successfully', type: 'success' });
+  } catch (error) {
+      setStatus({ message: 'An error occurred while Edit the image', type: 'error' });   
+  }
+};
+
+
     return(
       <>
       <Navbar></Navbar>
+      {status && <Message message={status.message} type={status.type} />}
       <form>
       <h2>Upload Stikers</h2>
       <div className='nameSticker'>
       <label>Image Name: </label>
       <input 
           type="text" 
-          value={imageName} 
+          value={imageName || ''} 
           onChange={handleImageNameChange}
           placeholder="Enter Name for the Image" 
           required       
@@ -145,7 +167,7 @@ const StikersForm = () => {
       <label>Image URL or Upload: </label>
       <input 
           type="text" 
-          value={imageUrl} 
+          value={imageUrl||''} 
           onChange={handleUrlChange}
           placeholder="Enter Image URL or Upload Image" 
           required
@@ -189,7 +211,7 @@ const StikersForm = () => {
       
       {editedSticker ? (
         <div>
-        <button onClick={handleSave}>Save Changes</button>
+        <button onClick={handleSaveEdite}>Save Changes</button>
         <button> Cancel Changes</button>
         </div>
       ):(
@@ -202,6 +224,7 @@ const StikersForm = () => {
       ) : (
         <StikersList stickers={stickers} onEdit={handleEditSticker}  />
       )}
+
       </>
     );
 }
