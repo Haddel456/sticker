@@ -21,29 +21,9 @@ const StikersForm = () => {
     const [editedSticker, setEditedSticker] = useState(null);
     const navigate = useNavigate(); 
     
-
-
-  //   const handleSave = async () => {
-
-  //       const data = {
-  //         name: imageName,
-  //         imagePath: imageUrl
-  //       }
-
-  //       console.log(data);
-
-
-  //       try {
-  //             await addSticker(data);
-  //             setStatus({ message: 'Sticker Added successfully', type: 'success' });
-  //     } catch (error) {
-  //       setStatus({ message: 'Error saveing image', type: 'error' });
-  //     }
-  // };
     
     const handleCancel = () => {
         setImageUrl('');  // Clear the image URL
-        setImageName('');
         setIsUploaded(false);  // Allow the user to upload another file
         setProgress(0);
         setEditedSticker(null);
@@ -79,7 +59,7 @@ const StikersForm = () => {
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
         if (!file) {
-          console.log('No file selected');
+          setStatus({ message: 'No file selected', type: 'info' });
           return;
         }
 
@@ -151,8 +131,10 @@ const handleSave = async (event) => {
     name:imageName
   }
 
-  console.log(data);
-
+  if (!imageUrl || !imageName){
+    setStatus({ message: 'Please enter the URL and the image name', type: 'info' });  
+    return;
+  }
 
   try {
         await addSticker(data);

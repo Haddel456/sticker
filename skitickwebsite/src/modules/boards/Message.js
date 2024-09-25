@@ -4,7 +4,7 @@ import './Message.css';
 // A component to display feedback messages
 function Message({ message, type }) {
     const [show, setShow] = useState(true);
-    const defaultDuration = 10000;
+    const defaultDuration = 7000;
 
     useEffect(() => {
         // Set a timer to hide the message after the defaultDuration
