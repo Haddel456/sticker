@@ -6,6 +6,7 @@ import { StikersList } from './StikersList'
 import Navbar from '../../publicComponents/navBar/Navbar'
 import { getStickers, addSticker, updateSticker } from './api/StikersApi'
 import Message from '../Message'
+import { useNavigate } from 'react-router-dom';
 
 const StikersForm = () => {
 
@@ -18,37 +19,35 @@ const StikersForm = () => {
     const [progress, setProgress] = useState(0);
     const [imageName, setImageName] = useState('');
     const [editedSticker, setEditedSticker] = useState(null);
+    const navigate = useNavigate(); 
     
 
-    const handleSave = async () => {
 
-        const data = {
-          imagePath: imageUrl,
-          name:imageName
-        }
+  //   const handleSave = async () => {
 
-        
-        console.log(data);
+  //       const data = {
+  //         name: imageName,
+  //         imagePath: imageUrl
+  //       }
 
-         if(!imageUrl || !imageName){
-           console.log('Enter URL and image name' );
-          return;
-        }
+  //       console.log(data);
 
-        try {
-              await addSticker(data);
-              setStatus({ message: 'Sticker edited successfully', type: 'success' });
-              console.log(status);
-      } catch (error) {
-        setStatus({ message: 'Error saveing image', type: 'error' });
-      }
-  };
+
+  //       try {
+  //             await addSticker(data);
+  //             setStatus({ message: 'Sticker Added successfully', type: 'success' });
+  //     } catch (error) {
+  //       setStatus({ message: 'Error saveing image', type: 'error' });
+  //     }
+  // };
     
     const handleCancel = () => {
         setImageUrl('');  // Clear the image URL
+        setImageName('');
         setIsUploaded(false);  // Allow the user to upload another file
         setProgress(0);
         setEditedSticker(null);
+
         if (fileInputRef.current) {
           fileInputRef.current.value = '';  
         }
@@ -131,13 +130,10 @@ const StikersForm = () => {
     const updatedSticker = {
       ...editedSticker,
       imagePath:imageUrl,
-      imageName:imageName
+      name:imageName
     }
 
-    if(!imageUrl || !imageName){
-      console.log('No URL entered');
-      return;
-    }
+  
     try {
           await updateSticker(editedSticker._id, updatedSticker);
           setStatus({ message: 'Image Edit successfully', type: 'success' });
@@ -146,6 +142,27 @@ const StikersForm = () => {
   }
 };
 
+
+const handleSave = async (event) => {
+  event.preventDefault(); 
+
+  const data = {
+    imagePath: imageUrl,
+    name:imageName
+  }
+
+  console.log(data);
+
+
+  try {
+        await addSticker(data);
+        setStatus({ message: 'Sticker Added successfully', type: 'success' });
+        navigate(0);
+} catch (error) {
+  setStatus({ message: 'Error saving image', type: 'error' });
+}
+ 
+};
 
     return(
       <>
@@ -157,7 +174,7 @@ const StikersForm = () => {
       <label>Image Name: </label>
       <input 
           type="text" 
-          value={imageName || ''} 
+          value={imageName} 
           onChange={handleImageNameChange}
           placeholder="Enter Name for the Image" 
           required       
@@ -166,8 +183,8 @@ const StikersForm = () => {
       <div className='urlInp'>
       <label>Image URL or Upload: </label>
       <input 
-          type="text" 
-          value={imageUrl||''} 
+          type="url" 
+          value={imageUrl} 
           onChange={handleUrlChange}
           placeholder="Enter Image URL or Upload Image" 
           required

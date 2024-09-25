@@ -1,7 +1,7 @@
 
 // src/api/stickersApi.js
 
-const BASE_URL = 'https://skitick-app-935033534367.me-west1.run.app/api/stickers';
+const BASE_URL = 'https://skitick-1027309556923.us-central1.run.app/api/stickers';
 
 // Fetch all stickers
 export const getStickers = async () => {
@@ -20,7 +20,7 @@ export const getStickers = async () => {
 // Add a new sticker
 export const addSticker = async (data) => {
     try {
-        const response = await fetch(`https://skitick-app-935033534367.me-west1.run.app/api/stickers/insert`, {
+        const response = await fetch(`${BASE_URL}/insert`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

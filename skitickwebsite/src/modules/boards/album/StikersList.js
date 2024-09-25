@@ -7,9 +7,9 @@ import Message from '../Message'
 
  export function StikersList({stickers ,  onEdit}) {
 
-  const [currentSticker, setCurrentSticker] = useState(stickers);
+  const [currentSticker, setCurrentSticker] = useState(stickers|| []);
   const [status , setStatus]= useState(null);
-
+  
  
 
   const handleDelete = async (deletedSticker) => {
@@ -21,14 +21,13 @@ import Message from '../Message'
          setCurrentSticker(currentSticker => 
           currentSticker.filter(sticker => sticker._id !== deletedSticker._id)
         );
-        setStatus({ message: 'Sticker edited successfully', type: 'success' });
+        setStatus({ message: 'Sticker Deleted successfully', type: 'success' });
         
     } catch (error) {
       setStatus({ message: 'An error occurred while editing the sticker', type: 'error' });
     }
 };
   
-
   const handleEdit = (editSticker) => {
     onEdit(editSticker);
   };
@@ -37,7 +36,7 @@ import Message from '../Message'
         <>
         {status && <Message message={status.message} type={status.type} />}
         <GridView>
-        {currentSticker && currentSticker
+        {Array.isArray(currentSticker) && currentSticker
         .filter(sticker => sticker.status !== '5')
         .map(sticker => (
         <div className='stickerListContainer' key={sticker._id}>
